@@ -1,4 +1,5 @@
 import requests
+from pprint import pprint
 
 
 def find_bis(ll, spn, request, locale="ru_RU"):
@@ -11,5 +12,7 @@ def find_bis(ll, spn, request, locale="ru_RU"):
               'spn': ','.join((spn, spn)),
               'type': 'biz'}
     response = requests.get(server, params=params).json()
-    print(response)
-    return response
+    return [tuple(map(str, response['features'][0]['geometry']['coordinates'])),
+            response['features'][0]['properties']['description'],
+            response['features'][0]['properties']['CompanyMetaData']['name'],
+            response['features'][0]['properties']['CompanyMetaData']['Hours']['text']]

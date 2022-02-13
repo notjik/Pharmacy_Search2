@@ -29,5 +29,5 @@ def get_ll(address):
     top = geocode(address)
     if not top:
         return None, None
-    coords = top['Point']['pos']
+    return top['Point']['pos']
 
